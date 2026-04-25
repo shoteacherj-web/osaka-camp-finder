@@ -12,7 +12,7 @@ export const useCompareStore = create<CompareStore>((set) => ({
   campIds: [],
   isReady: false,
   addCamp: (id) => set((state) => {
-    if (state.campIds.includes(id)) return state
+    if ((state.campIds as string[]).includes(id)) return state
     if (state.campIds.length === 0) return { campIds: [id], isReady: false }
     const newIds: [string, string] = [state.campIds[0], id]
     return { campIds: newIds, isReady: true }
