@@ -4,7 +4,7 @@ import { ensureAnonymousAuth } from '@/lib/supabase'
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    ensureAnonymousAuth()
+    ensureAnonymousAuth().catch(err => console.error('Auth error:', err))
   }, [])
   return <>{children}</>
 }

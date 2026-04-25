@@ -41,10 +41,13 @@ export function useVisitLogs(campsiteId?: string) {
   }, [])
 
   const deleteLog = useCallback(async (id: string) => {
+    const { data: authData } = await supabase.auth.getUser()
+    if (!authData.user) return { error: new Error('Not authenticated') }
     const { error } = await supabase
       .from('visit_logs')
       .delete()
       .eq('id', id)
+      .eq('user_id', authData.user.id)
     if (!error) setLogs(prev => prev.filter(l => l.id !== id))
     return { error }
   }, [])

@@ -8,6 +8,7 @@ export function useWeather(campsiteId: string) {
 
   useEffect(() => {
     if (!campsiteId) return
+    setForecast([])
     setLoading(true)
     supabase
       .from('weather_cache')

@@ -16,7 +16,11 @@ function NewLogForm() {
 
   async function handleSubmit(data: Omit<VisitLog, 'id' | 'user_id' | 'created_at'>) {
     const { error } = await addLog(data)
-    if (!error) router.push('/logs')
+    if (!error) {
+      router.push('/logs')
+    } else {
+      alert('保存に失敗しました。もう一度お試しください。')
+    }
   }
 
   return (
