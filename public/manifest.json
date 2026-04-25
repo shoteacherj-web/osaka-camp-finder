@@ -1,0 +1,22 @@
+{
+  "name": "Osaka Camp Finder",
+  "short_name": "CampFinder",
+  "description": "大阪近郊のキャンプ場を探す・記録する",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#16a34a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
