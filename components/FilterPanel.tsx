@@ -38,6 +38,7 @@ export function FilterPanel({ filter, onChange }: Props) {
       />
       <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
         <button
+          type="button"
           onClick={() => onChange({ ...filter, area: null })}
           className={`shrink-0 text-xs px-3 py-1.5 rounded-full border ${filter.area === null ? 'bg-green-600 text-white border-green-600' : 'border-gray-200 text-gray-600'}`}
         >
@@ -45,6 +46,7 @@ export function FilterPanel({ filter, onChange }: Props) {
         </button>
         {AREAS.map(area => (
           <button
+            type="button"
             key={area}
             onClick={() => onChange({ ...filter, area: filter.area === area ? null : area })}
             className={`shrink-0 text-xs px-3 py-1.5 rounded-full border ${filter.area === area ? 'bg-green-600 text-white border-green-600' : 'border-gray-200 text-gray-600'}`}
@@ -56,6 +58,7 @@ export function FilterPanel({ filter, onChange }: Props) {
       <div className="flex gap-2 overflow-x-auto pb-1">
         {PRICE_RANGES.map(p => (
           <button
+            type="button"
             key={p.value}
             onClick={() => onChange({ ...filter, price_range: filter.price_range === p.value ? null : p.value })}
             className={`shrink-0 text-xs px-3 py-1.5 rounded-full border ${filter.price_range === p.value ? 'bg-green-600 text-white border-green-600' : 'border-gray-200 text-gray-600'}`}
@@ -67,6 +70,7 @@ export function FilterPanel({ filter, onChange }: Props) {
       <div className="flex gap-2">
         {AMENITIES.map(a => (
           <button
+            type="button"
             key={a.value}
             onClick={() => toggleAmenity(a.value)}
             className={`shrink-0 text-xs px-3 py-1.5 rounded-full border ${filter.amenities.includes(a.value) ? 'bg-green-600 text-white border-green-600' : 'border-gray-200 text-gray-600'}`}

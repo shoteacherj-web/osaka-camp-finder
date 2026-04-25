@@ -46,7 +46,7 @@ export function CampCard({ camp, todayWeather, isVisited }: Props) {
       <div className="flex flex-wrap gap-1 mt-2">
         {camp.amenities.map(a => (
           <span key={a} className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
-            {AMENITY_LABELS[a]}
+            {AMENITY_LABELS[a] ?? a}
           </span>
         ))}
       </div>
