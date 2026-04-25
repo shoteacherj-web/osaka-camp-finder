@@ -21,11 +21,12 @@ export async function GET(request: Request) {
   for (const camp of camps) {
     try {
       const forecast = await fetchForecast(camp.lat, camp.lng)
-      await supabaseAdmin.from('weather_cache').upsert({
+      const { error: upsertError } = await supabaseAdmin.from('weather_cache').upsert({
         campsite_id: camp.id,
         forecast,
         updated_at: new Date().toISOString(),
       })
+      if (upsertError) throw new Error(upsertError.message)
       results.push({ id: camp.id, status: 'ok' })
     } catch {
       results.push({ id: camp.id, status: 'error' })

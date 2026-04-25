@@ -14,7 +14,8 @@ export function useWeather(campsiteId: string) {
       .select('forecast')
       .eq('campsite_id', campsiteId)
       .single()
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) console.error('useWeather:', error)
         if (data) setForecast(data.forecast as DayWeather[])
         setLoading(false)
       })
