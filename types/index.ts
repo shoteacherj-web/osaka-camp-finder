@@ -13,6 +13,10 @@ export type Campsite = {
   price_max?: number
   amenities: Amenity[]
   booking_url: string
+  image_url: string
+  description: string
+  pros: string[]
+  cons: string[]
 }
 
 export type DayWeather = {
