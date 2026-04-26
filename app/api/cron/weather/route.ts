@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   }
 
   const camps = campsData as Campsite[]
-  const results: { id: string; status: string; message?: string }[] = []
+  const results: { id: string; status: string }[] = []
 
   for (const camp of camps) {
     try {
@@ -29,7 +29,8 @@ export async function GET(request: Request) {
       if (upsertError) throw new Error(upsertError.message)
       results.push({ id: camp.id, status: 'ok' })
     } catch (e) {
-      results.push({ id: camp.id, status: 'error', message: e instanceof Error ? e.message : String(e) })
+      console.error(`Weather fetch failed for ${camp.id}:`, e)
+      results.push({ id: camp.id, status: 'error' })
     }
   }
 
