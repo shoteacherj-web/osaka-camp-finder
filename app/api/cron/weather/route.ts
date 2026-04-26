@@ -28,8 +28,8 @@ export async function GET(request: Request) {
       })
       if (upsertError) throw new Error(upsertError.message)
       results.push({ id: camp.id, status: 'ok' })
-    } catch {
-      results.push({ id: camp.id, status: 'error' })
+    } catch (e) {
+      results.push({ id: camp.id, status: 'error', message: e instanceof Error ? e.message : String(e) })
     }
   }
 
