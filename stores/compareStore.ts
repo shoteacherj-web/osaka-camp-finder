@@ -6,6 +6,7 @@ type CompareStore = {
   addCamp: (id: string) => void
   removeCamp: (id: string) => void
   clearCompare: () => void
+  markNavigated: () => void
 }
 
 export const useCompareStore = create<CompareStore>((set) => ({
@@ -22,4 +23,5 @@ export const useCompareStore = create<CompareStore>((set) => ({
     return { campIds: filtered, isReady: false }
   }),
   clearCompare: () => set({ campIds: [], isReady: false }),
+  markNavigated: () => set({ isReady: false }),
 }))

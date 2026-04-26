@@ -57,4 +57,14 @@ describe('useCompareStore', () => {
     expect(result.current.campIds).toEqual([])
     expect(result.current.isReady).toBe(false)
   })
+
+  it('markNavigated で isReady が false になり campIds は維持される', () => {
+    const { result } = renderHook(() => useCompareStore())
+    act(() => result.current.addCamp('camp-001'))
+    act(() => result.current.addCamp('camp-002'))
+    expect(result.current.isReady).toBe(true)
+    act(() => result.current.markNavigated())
+    expect(result.current.isReady).toBe(false)
+    expect(result.current.campIds).toEqual(['camp-001', 'camp-002'])
+  })
 })
