@@ -8,7 +8,11 @@
     "lng": 135.693,
     "price_min": 1000,
     "amenities": ["toilet"],
-    "booking_url": "https://osaka-midori.jp/mori/muroike/"
+    "booking_url": "https://osaka-midori.jp/mori/muroike/",
+    "image_url": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
+    "description": "大阪市街から車で約40分。むろいけ公園に隣接した静かな林間サイト。都会の喧騒を離れ、手軽に自然を満喫できる。",
+    "pros": ["大阪市内から近い", "周辺の散策コースが充実", "料金が安い"],
+    "cons": ["設備はトイレのみ", "売店なし・食材は持参必須", "サイト数が少なく予約枠が埋まりやすい"]
   },
   {
     "id": "camp-002",
@@ -20,7 +24,11 @@
     "price_min": 3000,
     "price_max": 5000,
     "amenities": ["toilet", "shower", "power"],
-    "booking_url": "https://www.nose-nosesato.com/"
+    "booking_url": "https://www.nose-nosesato.com/",
+    "image_url": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
+    "description": "能勢の里山に囲まれた整備されたオートキャンプ場。電源サイト・シャワーが充実しており、初心者ファミリーにも安心。",
+    "pros": ["電源サイトあり", "シャワー・管理棟が充実", "ファミリーに優しい設備"],
+    "cons": ["週末は混雑しやすい", "サイト間隔がやや狭め"]
   },
   {
     "id": "camp-003",
@@ -32,7 +40,11 @@
     "price_min": 5000,
     "price_max": 8000,
     "amenities": ["toilet", "shower", "power", "pet"],
-    "booking_url": "https://rurikei.jp/"
+    "booking_url": "https://rurikei.jp/",
+    "image_url": "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?w=800&q=80",
+    "description": "温泉施設「るり渓温泉」に隣接したグランピング対応キャンプ場。全設備完備で快適な自然体験ができる関西屈指の高級キャンプ場。",
+    "pros": ["隣接の温泉に入り放題", "全設備完備・ペット同伴可", "グランピング設備が充実"],
+    "cons": ["料金がやや高め", "人気で予約が取りにくい"]
   },
   {
     "id": "camp-004",
@@ -44,7 +56,11 @@
     "price_min": 2000,
     "price_max": 4000,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://miyamanavi.net/camp/"
+    "booking_url": "https://miyamanavi.net/camp/",
+    "image_url": "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+    "description": "日本の里100選・美山のかやぶき集落に隣接するキャンプ場。昔ながらの日本の原風景の中で過ごす、ここにしかない体験。",
+    "pros": ["かやぶき集落まで徒歩圏内", "清流で川遊びができる", "静かで自然豊か"],
+    "cons": ["電源なし", "最寄りコンビニまで距離がある"]
   },
   {
     "id": "camp-005",
@@ -56,7 +72,11 @@
     "price_min": 2500,
     "price_max": 4500,
     "amenities": ["toilet", "shower", "power"],
-    "booking_url": "https://makinokogen.com/"
+    "booking_url": "https://makinokogen.com/",
+    "image_url": "https://images.unsplash.com/photo-1473218861114-3afbcdde4258?w=800&q=80",
+    "description": "琵琶湖を一望できるマキノ高原に広がる大型キャンプ場。有名なメタセコイア並木まで車で5分。四季折々の高原の魅力が楽しめる。",
+    "pros": ["メタセコイア並木が近い", "サイトが広く開放感抜群", "電源・シャワー完備"],
+    "cons": ["夏・紅葉期は混雑が激しい", "週末の予約が取りにくい"]
   },
   {
     "id": "camp-006",
@@ -67,7 +87,11 @@
     "lng": 135.870,
     "price_min": 1500,
     "amenities": ["toilet"],
-    "booking_url": "https://shiga-ikimono.jp/"
+    "booking_url": "https://shiga-ikimono.jp/",
+    "image_url": "https://images.unsplash.com/photo-1536431311719-398b6704d4cc?w=800&q=80",
+    "description": "安曇川上流の清流沿いに位置する自然豊かなキャンプ場。川のせせらぎで目覚め、夏の川遊びを満喫できる穴場スポット。",
+    "pros": ["川遊びスポットが目の前", "静かで自然豊か", "料金が安い"],
+    "cons": ["設備はトイレのみ", "周辺に商業施設なし・食材は完全持参"]
   },
   {
     "id": "camp-007",
@@ -78,7 +102,11 @@
     "lng": 136.132,
     "price_min": 3000,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://sonimura.com/"
+    "booking_url": "https://sonimura.com/",
+    "image_url": "https://images.unsplash.com/photo-1465189684280-6a8fa9b19a7a?w=800&q=80",
+    "description": "秋のススキ野原で有名な曽爾高原のふもとに位置するキャンプ場。倶留尊山ハイキングの拠点としても人気が高い。",
+    "pros": ["秋のススキが一面に広がる絶景", "ハイキングの拠点に最適", "星空がきれい"],
+    "cons": ["アクセスがやや不便（バス本数少）", "冬季は非常に寒い"]
   },
   {
     "id": "camp-008",
@@ -90,7 +118,11 @@
     "price_min": 1000,
     "price_max": 2000,
     "amenities": ["toilet"],
-    "booking_url": "https://tenkawa-nara.com/"
+    "booking_url": "https://tenkawa-nara.com/",
+    "image_url": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
+    "description": "洞川温泉に近い天川村の清流沿いキャンプ場。名水百選「洞川湧水群」が近く、天然のヤマメが泳ぐ川で釣りも楽しめる。",
+    "pros": ["天然清流で釣りができる", "夏でも涼しい避暑地", "温泉（洞川温泉）が近い"],
+    "cons": ["電源・シャワーなし", "大阪からアクセスが遠く道が細い"]
   },
   {
     "id": "camp-009",
@@ -101,7 +133,11 @@
     "lng": 135.906,
     "price_min": 1000,
     "amenities": ["toilet"],
-    "booking_url": "https://www.hongu.jp/kanko/camp/"
+    "booking_url": "https://www.hongu.jp/kanko/camp/",
+    "image_url": "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=800&q=80",
+    "description": "熊野本宮大社近く・川湯温泉エリアのキャンプ場。冬季の「仙人風呂」（川床の露天風呂）で有名な大塔川のほとりに位置する。",
+    "pros": ["仙人風呂が近い（冬季）", "熊野古道の拠点に最適", "清流で川遊びOK"],
+    "cons": ["設備はトイレのみ", "夏は虫が多い", "大阪から3時間以上かかる"]
   },
   {
     "id": "camp-010",
@@ -113,7 +149,11 @@
     "price_min": 5500,
     "price_max": 9000,
     "amenities": ["toilet", "shower", "power", "pet"],
-    "booking_url": "https://shirahama-camp.jp/"
+    "booking_url": "https://shirahama-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    "description": "白浜海水浴場まで車で5分の好立地。関西有数のリゾート地でキャンプを満喫できる。全設備完備で快適さと海遊びを両立。",
+    "pros": ["海水浴場が近い", "全設備完備・ペット同伴可", "周辺観光スポットが充実"],
+    "cons": ["料金が高め", "夏は混雑・予約が取りにくい"]
   },
   {
     "id": "camp-011",
@@ -125,7 +165,11 @@
     "price_min": 3500,
     "price_max": 6000,
     "amenities": ["toilet", "shower", "power"],
-    "booking_url": "https://www.rokkosan.com/country/"
+    "booking_url": "https://www.rokkosan.com/country/",
+    "image_url": "https://images.unsplash.com/photo-1533240332313-0db49b459ad6?w=800&q=80",
+    "description": "六甲山山頂付近に位置し、神戸の夜景を望める絶好のロケーション。標高が高く夏も涼しく、神戸市街からのアクセスも抜群。",
+    "pros": ["神戸の夜景が見える", "夏でも涼しい避暑地", "神戸・大阪からアクセス良好"],
+    "cons": ["冬季は閉鎖", "週末は混雑しやすい", "料金がやや高め"]
   },
   {
     "id": "camp-012",
@@ -137,7 +181,11 @@
     "price_min": 2500,
     "price_max": 4000,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://kanbehighland.jp/"
+    "booking_url": "https://kanbehighland.jp/",
+    "image_url": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+    "description": "但馬の高原リゾート・神鍋高原のキャンプ場。夏はウォータースライダー、冬はスキーと四季を通じて楽しめるリゾート感覚のサイト。",
+    "pros": ["ウォータースライダーあり（夏）", "高原で涼しく快適", "温泉が近い"],
+    "cons": ["大阪から2.5時間とやや遠い", "電源サイトなし"]
   },
   {
     "id": "camp-013",
@@ -149,7 +197,11 @@
     "price_min": 4000,
     "price_max": 7000,
     "amenities": ["toilet", "shower", "power", "pet"],
-    "booking_url": "https://awaji-camp.jp/"
+    "booking_url": "https://awaji-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80",
+    "description": "淡路島北部の海を望む好立地。明石海峡大橋の夜景と、玉ねぎ・タコなど淡路島グルメが最大の魅力。全設備完備でペット可。",
+    "pros": ["海の眺望と橋の夜景が美しい", "淡路島グルメが豊富", "全設備完備・ペット可"],
+    "cons": ["料金がやや高め", "明石海峡大橋の通行料がかかる"]
   },
   {
     "id": "camp-014",
@@ -161,7 +213,11 @@
     "price_min": 4000,
     "price_max": 6000,
     "amenities": ["toilet", "shower", "power"],
-    "booking_url": "https://woodypal.jp/"
+    "booking_url": "https://woodypal.jp/",
+    "image_url": "https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?w=800&q=80",
+    "description": "鏡のような水面が美しい余呉湖畔に広がる大型総合施設。コテージ・バーベキュー棟も充実し、ファミリーから大人キャンプまで対応。",
+    "pros": ["余呉湖の絶景が楽しめる", "コテージも選択可能", "施設・設備が充実"],
+    "cons": ["週末は混雑しやすい", "料金がやや高め"]
   },
   {
     "id": "camp-015",
@@ -172,7 +228,11 @@
     "lng": 135.432,
     "price_min": 800,
     "amenities": ["toilet"],
-    "booking_url": "https://www.ikedashi-kanko.jp/"
+    "booking_url": "https://www.ikedashi-kanko.jp/",
+    "image_url": "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?w=800&q=80",
+    "description": "大阪府池田市の五月山公園内にある都市型キャンプ場。阪急電車でアクセス可能な手軽さが魅力で、電車キャンプ入門にも最適。",
+    "pros": ["最安値クラスの料金", "阪急電車でアクセス可能（車不要）", "初心者・ソロキャンにやさしい"],
+    "cons": ["設備はトイレのみ", "サイト数が少ない", "自然感はやや薄め"]
   },
   {
     "id": "camp-016",
@@ -183,7 +243,11 @@
     "lng": 135.789,
     "price_min": 1200,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://totsukawa.info/"
+    "booking_url": "https://totsukawa.info/",
+    "image_url": "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800&q=80",
+    "description": "日本最大の村・十津川村の温泉街近くのキャンプ場。全長297mの谷瀬の吊り橋など観光名所も多く、秘境感あふれる滞在ができる。",
+    "pros": ["温泉が近い", "谷瀬の吊り橋（日本一の生活用吊り橋）が観光名所", "シャワーあり"],
+    "cons": ["大阪から3時間以上と遠い", "山道が細く運転に注意"]
   },
   {
     "id": "camp-017",
@@ -195,7 +259,11 @@
     "price_min": 2000,
     "price_max": 3500,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://koyasan-camp.jp/"
+    "booking_url": "https://koyasan-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1559827291-72ebbbe703fe?w=800&q=80",
+    "description": "世界遺産・高野山の厳粛な杉林の中に位置する林間キャンプ場。精進料理・壇上伽藍など世界遺産を徒歩で巡れる唯一無二の立地。",
+    "pros": ["世界遺産の高野山が徒歩圏内", "林間で夏も涼しい", "神聖な雰囲気のなかで過ごせる"],
+    "cons": ["電源なし", "冬季は積雪あり閉鎖の場合あり", "アクセスに時間がかかる"]
   },
   {
     "id": "camp-018",
@@ -207,7 +275,11 @@
     "price_min": 2500,
     "price_max": 4000,
     "amenities": ["toilet", "power"],
-    "booking_url": "https://minabe-camp.jp/"
+    "booking_url": "https://minabe-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&q=80",
+    "description": "梅の名産地・みなべ町のオートキャンプ場。2月の梅まつり期間は一面に広がる梅林の絶景が楽しめ、南紀観光の拠点にも最適。",
+    "pros": ["梅まつり（2月）の絶景", "電源サイットあり", "南紀観光の拠点に便利"],
+    "cons": ["シャワーなし", "周辺の商業施設がやや少ない"]
   },
   {
     "id": "camp-019",
@@ -219,7 +291,11 @@
     "price_min": 2000,
     "price_max": 3000,
     "amenities": ["toilet"],
-    "booking_url": "https://hozukyo-camp.jp/"
+    "booking_url": "https://hozukyo-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1547223915-2a5bdd5d0b71?w=800&q=80",
+    "description": "保津川下りで有名な保津峡の渓谷美を堪能できるキャンプ場。JR保津峡駅から徒歩でアクセス可能で、川遊びも楽しめる。",
+    "pros": ["電車でアクセス可能（JR保津峡駅から徒歩）", "渓谷の景色が美しい", "川遊びができる"],
+    "cons": ["設備はトイレのみ", "売店・自販機なし"]
   },
   {
     "id": "camp-020",
@@ -230,6 +306,10 @@
     "lng": 135.398,
     "price_min": 2000,
     "amenities": ["toilet", "shower"],
-    "booking_url": "https://mukogawa-camp.jp/"
+    "booking_url": "https://mukogawa-camp.jp/",
+    "image_url": "https://images.unsplash.com/photo-1540202404-a2f29564be72?w=800&q=80",
+    "description": "武庫川渓谷の廃線ハイキングコース沿いに位置するキャンプ場。大阪・神戸から1時間以内とアクセス良好で、渓谷の自然美が楽しめる。",
+    "pros": ["廃線ハイキングコースが近い", "渓谷美が楽しめる", "大阪・神戸から1時間以内"],
+    "cons": ["サイト数が少なめ", "電源なし"]
   }
 ]
