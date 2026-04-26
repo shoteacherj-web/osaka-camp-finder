@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { useEffect } from 'react'
 import Link from 'next/link'
@@ -22,19 +22,20 @@ const AMENITY_LABELS: Record<string, string> = {
 
 export default function CampDetailPage() {
   const { id } = useParams<{ id: string }>()
+  const router = useRouter()
   const camp = (campsData as Campsite[]).find(c => c.id === id)
 
   const { forecast, loading: weatherLoading } = useWeather(id)
   const { logs, deleteLog } = useVisitLogs(id)
-  const { addCamp, isReady, campIds, clearCompare } = useCompareStore()
+  const { addCamp, isReady, campIds, markNavigated } = useCompareStore()
   const { toggleFavorite, isFavorite } = useFavoritesStore()
 
   useEffect(() => {
     if (isReady) {
-      alert('もう1件選択されました。比較機能はPhase 2で実装予定です。')
-      clearCompare()
+      markNavigated()
+      router.push('/compare')
     }
-  }, [isReady, clearCompare])
+  }, [isReady, router, markNavigated])
 
   if (!camp) return notFound()
 
@@ -47,6 +48,12 @@ export default function CampDetailPage() {
         <Link href="/" className="text-green-600 shrink-0">← 戻る</Link>
         <h1 className="font-bold text-gray-900 truncate">{camp.name}</h1>
       </div>
+
+      {camp.image_url ? (
+        <img src={camp.image_url} alt={camp.name} className="w-full aspect-video object-cover" />
+      ) : (
+        <div className="w-full aspect-video bg-gradient-to-br from-green-900 to-green-500" />
+      )}
 
       <div className="px-4 py-4 space-y-4">
         <section className="bg-white rounded-xl p-4 shadow-sm">
@@ -62,6 +69,35 @@ export default function CampDetailPage() {
           <p className="text-lg font-semibold text-gray-900 mt-1">
             ¥{camp.price_min.toLocaleString()}〜{camp.price_max ? `¥${camp.price_max.toLocaleString()}` : ''} /泊
           </p>
+
+          {camp.description && (
+            <p className="text-sm text-gray-600 mt-3 leading-relaxed">{camp.description}</p>
+          )}
+          {(camp.pros.length > 0 || camp.cons.length > 0) && (
+            <div className="grid grid-cols-2 gap-3 mt-3">
+              {camp.pros.length > 0 && (
+                <div className="bg-green-50 rounded-xl p-3">
+                  <p className="text-xs font-semibold text-green-700 mb-1.5">👍 良いところ</p>
+                  <ul className="space-y-1">
+                    {camp.pros.map((pro, i) => (
+                      <li key={i} className="text-xs text-gray-700 leading-snug">・{pro}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {camp.cons.length > 0 && (
+                <div className="bg-orange-50 rounded-xl p-3">
+                  <p className="text-xs font-semibold text-orange-700 mb-1.5">👎 イマイチ</p>
+                  <ul className="space-y-1">
+                    {camp.cons.map((con, i) => (
+                      <li key={i} className="text-xs text-gray-700 leading-snug">・{con}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="flex gap-3 mt-4">
             <button
               type="button"
