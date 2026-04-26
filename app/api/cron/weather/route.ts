@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   }
 
   const camps = campsData as Campsite[]
-  const results: { id: string; status: string }[] = []
+  const results: { id: string; status: string; message?: string }[] = []
 
   for (const camp of camps) {
     try {
