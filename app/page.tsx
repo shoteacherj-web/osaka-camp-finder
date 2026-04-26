@@ -16,7 +16,7 @@ const DEFAULT_FILTER: CampsiteFilter = {
 export default function HomePage() {
   const [filter, setFilter] = useState<CampsiteFilter>(DEFAULT_FILTER)
   const [todayWeatherMap, setTodayWeatherMap] = useState<Record<string, DayWeather>>({})
-  const camps = useCamps(filter)
+  const { camps, loading } = useCamps(filter)
 
   useEffect(() => {
     supabase
@@ -42,17 +42,34 @@ export default function HomePage() {
       </header>
 
       <main className="px-4 py-4 space-y-3 max-w-lg mx-auto">
-        <p className="text-sm text-gray-500">{camps.length}件のキャンプ場</p>
-        {camps.length === 0 ? (
-          <p className="text-center text-gray-400 py-16">条件に合うキャンプ場が見つかりませんでした</p>
+        {loading ? (
+          <div className="space-y-3">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-xl shadow-sm overflow-hidden">
+                <div className="w-full aspect-video bg-gray-100 animate-pulse" />
+                <div className="p-4 space-y-2">
+                  <div className="h-4 bg-gray-100 rounded animate-pulse w-3/4" />
+                  <div className="h-3 bg-gray-100 rounded animate-pulse w-1/2" />
+                  <div className="h-3 bg-gray-100 rounded animate-pulse w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
-          camps.map(camp => (
-            <CampCard
-              key={camp.id}
-              camp={camp}
-              todayWeather={todayWeatherMap[camp.id]}
-            />
-          ))
+          <>
+            <p className="text-sm text-gray-500">{camps.length}件のキャンプ場</p>
+            {camps.length === 0 ? (
+              <p className="text-center text-gray-400 py-16">条件に合うキャンプ場が見つかりませんでした</p>
+            ) : (
+              camps.map(camp => (
+                <CampCard
+                  key={camp.id}
+                  camp={camp}
+                  todayWeather={todayWeatherMap[camp.id]}
+                />
+              ))
+            )}
+          </>
         )}
       </main>
     </div>
