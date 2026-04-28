@@ -54,7 +54,7 @@ export default function CampDetailPage() {
     )
   }
 
-  const inCompare = campIds.includes(id)
+  const inCompare = campIds.some(c => c === id)
   const favorite = isFavorite(id)
 
   return (
