@@ -8,12 +8,19 @@ export default function AdminCampsPage() {
   const router = useRouter()
   const [camps, setCamps] = useState<Campsite[]>([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
 
   async function fetchCamps() {
-    const res = await fetch('/api/admin/camps')
-    if (res.status === 401) { router.push('/admin'); return }
-    setCamps(await res.json())
-    setLoading(false)
+    try {
+      const res = await fetch('/api/admin/camps')
+      if (res.status === 401) { router.push('/admin'); return }
+      if (!res.ok) { setError(`エラー: ${res.status}`); setLoading(false); return }
+      setCamps(await res.json())
+    } catch {
+      setError('通信エラーが発生しました')
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => { fetchCamps() }, [])
@@ -49,6 +56,11 @@ export default function AdminCampsPage() {
           Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="h-16 bg-gray-100 rounded-xl animate-pulse" />
           ))
+        ) : error ? (
+          <div className="text-center py-16">
+            <p className="text-red-400 text-sm">{error}</p>
+            <button onClick={fetchCamps} className="mt-4 text-sm text-green-600 underline">再読み込み</button>
+          </div>
         ) : camps.length === 0 ? (
           <p className="text-center text-gray-400 py-16">キャンプ場がありません</p>
         ) : (
