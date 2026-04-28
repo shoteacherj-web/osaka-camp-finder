@@ -58,7 +58,7 @@ export function CampsiteForm({ initial = EMPTY, onSubmit, submitLabel }: Props) 
     }
   }
 
-  const inputClass = 'w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500'
+  const inputClass = 'w-full border border-gray-200 rounded-xl px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500'
 
   function field(label: string, children: React.ReactNode) {
     return (
