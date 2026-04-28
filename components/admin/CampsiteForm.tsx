@@ -30,6 +30,30 @@ export function CampsiteForm({ initial = EMPTY, onSubmit, submitLabel }: Props) 
   const [consInput, setConsInput] = useState(initial.cons.join('\n'))
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [geocoding, setGeocoding] = useState(false)
+  const [geocodeError, setGeocodeError] = useState('')
+
+  async function fetchCoords() {
+    if (!form.address) return
+    setGeocoding(true)
+    setGeocodeError('')
+    try {
+      const res = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(form.address)}&language=ja&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
+      )
+      const data = await res.json()
+      if (data.status !== 'OK' || !data.results[0]) {
+        setGeocodeError('住所から座標を取得できませんでした')
+        return
+      }
+      const { lat, lng } = data.results[0].geometry.location
+      setForm(prev => ({ ...prev, lat, lng }))
+    } catch {
+      setGeocodeError('通信エラーが発生しました')
+    } finally {
+      setGeocoding(false)
+    }
+  }
 
   function set<K extends keyof FormData>(key: K, value: FormData[K]) {
     setForm(prev => ({ ...prev, [key]: value }))
@@ -43,6 +67,10 @@ export function CampsiteForm({ initial = EMPTY, onSubmit, submitLabel }: Props) 
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (form.lat === 0 && form.lng === 0) {
+      setError('住所から座標を取得してください')
+      return
+    }
     setLoading(true)
     setError('')
     try {
@@ -81,19 +109,23 @@ export function CampsiteForm({ initial = EMPTY, onSubmit, submitLabel }: Props) 
         </select>
       ))}
       {field('住所 *', (
-        <input type="text" value={form.address} onChange={e => set('address', e.target.value)}
-          className={inputClass} required />
+        <div className="space-y-2">
+          <input type="text" value={form.address} onChange={e => set('address', e.target.value)}
+            className={inputClass} required placeholder="例：大阪府泉南郡岬町深日2000" />
+          <button
+            type="button"
+            onClick={fetchCoords}
+            disabled={geocoding || !form.address}
+            className="text-xs text-green-600 border border-green-600 px-3 py-1.5 rounded-lg font-medium hover:bg-green-50 disabled:opacity-40"
+          >
+            {geocoding ? '取得中…' : '📍 住所から座標を自動取得'}
+          </button>
+          {geocodeError && <p className="text-xs text-red-500">{geocodeError}</p>}
+          {form.lat !== 0 && form.lng !== 0 && (
+            <p className="text-xs text-gray-400">座標: {form.lat.toFixed(6)}, {form.lng.toFixed(6)}</p>
+          )}
+        </div>
       ))}
-      <div className="grid grid-cols-2 gap-3">
-        {field('緯度 *', (
-          <input type="number" value={form.lat} onChange={e => set('lat', Number(e.target.value))}
-            className={inputClass} required step="any" />
-        ))}
-        {field('経度 *', (
-          <input type="number" value={form.lng} onChange={e => set('lng', Number(e.target.value))}
-            className={inputClass} required step="any" />
-        ))}
-      </div>
       <div className="grid grid-cols-2 gap-3">
         {field('料金（最安）*', (
           <input type="number" value={form.price_min} onChange={e => set('price_min', Number(e.target.value))}
