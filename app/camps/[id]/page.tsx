@@ -1,9 +1,7 @@
 'use client'
 import { useParams, useRouter } from 'next/navigation'
-import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
 import Link from 'next/link'
-import campsData from '@/data/camps.json'
+import { useCamp } from '@/hooks/useCamp'
 import { useWeather } from '@/hooks/useWeather'
 import { useVisitLogs } from '@/hooks/useVisitLogs'
 import { useCompareStore } from '@/stores/compareStore'
@@ -11,7 +9,6 @@ import { useFavoritesStore } from '@/stores/favoritesStore'
 import { WeatherWidget } from '@/components/WeatherWidget'
 import { CampMap } from '@/components/CampMap'
 import { VisitLogCard } from '@/components/VisitLogCard'
-import type { Campsite } from '@/types'
 
 const AMENITY_LABELS: Record<string, string> = {
   toilet: 'トイレ',
@@ -23,29 +20,47 @@ const AMENITY_LABELS: Record<string, string> = {
 export default function CampDetailPage() {
   const { id } = useParams<{ id: string }>()
   const router = useRouter()
-  const camp = (campsData as Campsite[]).find(c => c.id === id)
+  const { camp, loading: campLoading } = useCamp(id)
 
   const { forecast, loading: weatherLoading } = useWeather(id)
   const { logs, deleteLog } = useVisitLogs(id)
-  const { addCamp, isReady, campIds, markNavigated } = useCompareStore()
+  const { campIds, addCamp, removeCamp } = useCompareStore()
   const { toggleFavorite, isFavorite } = useFavoritesStore()
 
-  useEffect(() => {
-    if (isReady) {
-      markNavigated()
-      router.push('/compare')
-    }
-  }, [isReady, router, markNavigated])
+  if (campLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 max-w-lg mx-auto">
+        <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3 z-10">
+          <button type="button" onClick={() => router.back()} className="text-green-600 shrink-0">← 戻る</button>
+          <div className="h-5 w-40 bg-gray-200 rounded animate-pulse" />
+        </div>
+        <div className="w-full aspect-video bg-gray-200 animate-pulse" />
+        <div className="px-4 py-4 space-y-3">
+          <div className="h-32 bg-gray-100 rounded-xl animate-pulse" />
+          <div className="h-24 bg-gray-100 rounded-xl animate-pulse" />
+        </div>
+      </div>
+    )
+  }
 
-  if (!camp) return notFound()
+  if (!camp) {
+    return (
+      <div className="min-h-screen bg-gray-50 max-w-lg mx-auto flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-400 mb-4">キャンプ場が見つかりません</p>
+          <button type="button" onClick={() => router.back()} className="text-green-600 text-sm">← 戻る</button>
+        </div>
+      </div>
+    )
+  }
 
-  const inCompare = (campIds as string[]).includes(id)
+  const inCompare = campIds.includes(id)
   const favorite = isFavorite(id)
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-lg mx-auto">
       <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3 z-10">
-        <Link href="/" className="text-green-600 shrink-0">← 戻る</Link>
+        <button type="button" onClick={() => router.back()} className="text-green-600 shrink-0">← 戻る</button>
         <h1 className="font-bold text-gray-900 truncate">{camp.name}</h1>
       </div>
 
@@ -98,14 +113,13 @@ export default function CampDetailPage() {
             </div>
           )}
 
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-2 mt-4">
             <button
               type="button"
-              onClick={() => addCamp(id)}
-              disabled={inCompare}
-              className={`flex-1 py-2.5 text-sm rounded-xl border font-medium ${inCompare ? 'border-gray-200 text-gray-400 bg-gray-50' : 'border-green-600 text-green-600 hover:bg-green-50'}`}
+              onClick={() => inCompare ? removeCamp(id) : addCamp(id)}
+              className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${inCompare ? 'bg-green-600 text-white border-green-600' : 'border-green-600 text-green-600 hover:bg-green-50'}`}
             >
-              {inCompare ? '比較に追加済み' : '比較に追加'}
+              {inCompare ? '✓ 比較リストに追加済み' : '+ 比較リストに追加'}
             </button>
             <button
               type="button"

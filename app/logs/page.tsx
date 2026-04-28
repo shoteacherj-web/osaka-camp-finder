@@ -1,19 +1,27 @@
 'use client'
 import Link from 'next/link'
-import campsData from '@/data/camps.json'
 import { useVisitLogs } from '@/hooks/useVisitLogs'
+import { useCamps } from '@/hooks/useCamps'
 import { VisitLogCard } from '@/components/VisitLogCard'
-import type { Campsite } from '@/types'
+
+import type { CampsiteFilter } from '@/types'
+
+const DEFAULT_FILTER: CampsiteFilter = { area: null, price_range: null, amenities: [], search: '' }
 
 export default function LogsPage() {
   const { logs, loading, deleteLog } = useVisitLogs()
-  const camps = campsData as Campsite[]
+  const { camps } = useCamps(DEFAULT_FILTER)
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-lg mx-auto">
-      <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 flex justify-between items-center z-10">
-        <h1 className="font-bold text-gray-900">訪問記録</h1>
-        <Link href="/logs/new" className="text-sm text-green-600 font-medium">+ 追加</Link>
+      <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 z-10">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <Link href="/" className="text-green-600 text-sm shrink-0">← 戻る</Link>
+            <h1 className="font-bold text-gray-900">訪問記録</h1>
+          </div>
+          <Link href="/logs/new" className="text-sm text-green-600 font-medium">+ 追加</Link>
+        </div>
       </div>
 
       <div className="px-4 py-4 space-y-3">
