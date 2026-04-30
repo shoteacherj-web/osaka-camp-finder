@@ -1,27 +1,25 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type CompareStore = {
-  campIds: [] | [string] | [string, string]
-  isReady: boolean
+  campIds: string[]
   addCamp: (id: string) => void
   removeCamp: (id: string) => void
-  clearCompare: () => void
-  markNavigated: () => void
+  clearAll: () => void
 }
 
-export const useCompareStore = create<CompareStore>((set) => ({
-  campIds: [],
-  isReady: false,
-  addCamp: (id) => set((state) => {
-    if ((state.campIds as string[]).includes(id)) return state
-    if (state.campIds.length === 0) return { campIds: [id], isReady: false }
-    const newIds: [string, string] = [state.campIds[0], id]
-    return { campIds: newIds, isReady: true }
-  }),
-  removeCamp: (id) => set((state) => {
-    const filtered = state.campIds.filter(c => c !== id) as [] | [string]
-    return { campIds: filtered, isReady: false }
-  }),
-  clearCompare: () => set({ campIds: [], isReady: false }),
-  markNavigated: () => set({ isReady: false }),
-}))
+export const useCompareStore = create<CompareStore>()(
+  persist(
+    (set) => ({
+      campIds: [],
+      addCamp: (id) => set((state) => ({
+        campIds: state.campIds.includes(id) ? state.campIds : [...state.campIds, id],
+      })),
+      removeCamp: (id) => set((state) => ({
+        campIds: state.campIds.filter(c => c !== id),
+      })),
+      clearAll: () => set({ campIds: [] }),
+    }),
+    { name: 'osaka-camp-favorites' }
+  )
+)

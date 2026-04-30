@@ -5,7 +5,6 @@ import { useCamp } from '@/hooks/useCamp'
 import { useWeather } from '@/hooks/useWeather'
 import { useVisitLogs } from '@/hooks/useVisitLogs'
 import { useCompareStore } from '@/stores/compareStore'
-import { useFavoritesStore } from '@/stores/favoritesStore'
 import { WeatherWidget } from '@/components/WeatherWidget'
 import { CampMap } from '@/components/CampMap'
 import { VisitLogCard } from '@/components/VisitLogCard'
@@ -25,7 +24,6 @@ export default function CampDetailPage() {
   const { forecast, loading: weatherLoading } = useWeather(id)
   const { logs, deleteLog } = useVisitLogs(id)
   const { campIds, addCamp, removeCamp } = useCompareStore()
-  const { toggleFavorite, isFavorite } = useFavoritesStore()
 
   if (campLoading) {
     return (
@@ -54,8 +52,7 @@ export default function CampDetailPage() {
     )
   }
 
-  const inCompare = campIds.some(c => c === id)
-  const favorite = isFavorite(id)
+  const inFavorites = campIds.some(c => c === id)
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-lg mx-auto">
@@ -113,20 +110,13 @@ export default function CampDetailPage() {
             </div>
           )}
 
-          <div className="flex gap-2 mt-4">
+          <div className="mt-4">
             <button
               type="button"
-              onClick={() => inCompare ? removeCamp(id) : addCamp(id)}
-              className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${inCompare ? 'bg-green-600 text-white border-green-600' : 'border-green-600 text-green-600 hover:bg-green-50'}`}
+              onClick={() => inFavorites ? removeCamp(id) : addCamp(id)}
+              className={`w-full py-2.5 text-sm rounded-xl border font-medium transition-colors ${inFavorites ? 'bg-green-600 text-white border-green-600' : 'border-green-600 text-green-600 hover:bg-green-50'}`}
             >
-              {inCompare ? '✓ 比較リストに追加済み' : '+ 比較リストに追加'}
-            </button>
-            <button
-              type="button"
-              onClick={() => toggleFavorite(id)}
-              className={`px-4 py-2.5 text-sm rounded-xl border font-medium ${favorite ? 'bg-yellow-400 text-white border-yellow-400' : 'border-gray-200 text-gray-600'}`}
-            >
-              {favorite ? '★' : '☆'}
+              {inFavorites ? '♡ お気に入り済み' : '♡ お気に入りに追加'}
             </button>
           </div>
           <a

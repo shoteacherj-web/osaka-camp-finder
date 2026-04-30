@@ -10,7 +10,7 @@ export function BottomNav() {
   if (pathname.startsWith('/admin')) return null
 
   const navItems = [
-    { href: '/compare', label: '比較', icon: '⚖️', badge: campIds.length },
+    { href: '/compare', label: 'お気に入り', icon: '♡', badge: campIds.length },
     { href: '/logs', label: '記録', icon: '📓', badge: 0 },
   ]
 
