@@ -108,11 +108,20 @@ export default function FavoritesPage() {
         )}
       </div>
 
-      <main className="px-4 py-3 space-y-2">
+      <main className="px-4 py-3">
         {loading ? (
-          Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-xl h-20 animate-pulse" />
-          ))
+          <div className="grid grid-cols-2 gap-3">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="bg-white rounded-xl overflow-hidden animate-pulse">
+                <div className="w-full aspect-[4/3] bg-gray-100" />
+                <div className="p-3 space-y-2">
+                  <div className="h-3 bg-gray-100 rounded w-3/4" />
+                  <div className="h-3 bg-gray-100 rounded w-1/2" />
+                  <div className="h-7 bg-gray-100 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
         ) : camps.length === 0 ? (
           <div className="text-center py-24">
             <p className="text-5xl mb-4">♡</p>
@@ -126,54 +135,55 @@ export default function FavoritesPage() {
             </Link>
           </div>
         ) : (
-          camps.map(camp => {
-            const isSelected = selectedIds.includes(camp.id)
-            const isFull = selectedIds.length >= 2 && !isSelected
-            return (
-              <div
-                key={camp.id}
-                className={`bg-white rounded-xl px-4 py-3 border transition-all ${isSelected ? 'border-green-500 ring-1 ring-green-500' : 'border-gray-100'}`}
-              >
-                <div className="flex items-start gap-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-gray-900 text-sm truncate">{camp.name}</p>
-                    <p className="text-xs text-gray-400 mt-0.5">{camp.area} · ¥{camp.price_min.toLocaleString()}〜</p>
-                    <div className="flex gap-1 mt-1.5 flex-wrap">
-                      {camp.amenities.slice(0, 3).map(a => (
-                        <span key={a} className="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">
-                          {AMENITY_LABELS[a]}
-                        </span>
-                      ))}
+          <div className="grid grid-cols-2 gap-3">
+            {camps.map(camp => {
+              const isSelected = selectedIds.includes(camp.id)
+              const isFull = selectedIds.length >= 2 && !isSelected
+              return (
+                <div
+                  key={camp.id}
+                  className={`bg-white rounded-xl overflow-hidden border transition-all ${isSelected ? 'border-green-500 ring-1 ring-green-500' : 'border-gray-100'}`}
+                >
+                  <Link href={`/camps/${camp.id}`}>
+                    {camp.image_url ? (
+                      <img src={camp.image_url} alt={camp.name} className="w-full aspect-[4/3] object-cover" />
+                    ) : (
+                      <div className="w-full aspect-[4/3] bg-gradient-to-br from-green-900 to-green-500" />
+                    )}
+                  </Link>
+                  <div className="p-2.5">
+                    <p className="font-semibold text-gray-900 text-xs leading-snug line-clamp-2">{camp.name}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">{camp.area}</p>
+                    <p className="text-xs font-medium text-green-700 mt-0.5">¥{camp.price_min.toLocaleString()}〜</p>
+                    <div className="flex items-center gap-1.5 mt-2">
+                      <button
+                        type="button"
+                        onClick={() => toggleSelect(camp.id)}
+                        disabled={isFull}
+                        className={`flex-1 text-xs py-1.5 rounded-lg font-medium border transition-all ${
+                          isSelected
+                            ? 'bg-green-600 text-white border-green-600'
+                            : isFull
+                              ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                              : 'border-green-600 text-green-600'
+                        }`}
+                      >
+                        {isSelected ? '✓ 選択中' : '比較する'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRemove(camp.id)}
+                        className="text-gray-300 hover:text-red-400 text-lg leading-none px-1"
+                        aria-label="削除"
+                      >
+                        ×
+                      </button>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 shrink-0 mt-0.5">
-                    <button
-                      type="button"
-                      onClick={() => toggleSelect(camp.id)}
-                      disabled={isFull}
-                      className={`text-xs px-3 py-1.5 rounded-lg font-medium border transition-all ${
-                        isSelected
-                          ? 'bg-green-600 text-white border-green-600'
-                          : isFull
-                            ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                            : 'border-green-600 text-green-600 hover:bg-green-50'
-                      }`}
-                    >
-                      {isSelected ? '✓ 選択中' : '比較する'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleRemove(camp.id)}
-                      className="text-gray-300 hover:text-red-400 text-xl leading-none"
-                      aria-label="削除"
-                    >
-                      ×
-                    </button>
-                  </div>
                 </div>
-              </div>
-            )
-          })
+              )
+            })}
+          </div>
         )}
       </main>
     </div>
