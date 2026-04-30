@@ -32,6 +32,7 @@ export default function FavoritesPage() {
   const { campIds, removeCamp } = useCompareStore()
   const camps = allCamps.filter(c => campIds.includes(c.id))
   const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [confirmId, setConfirmId] = useState<string | null>(null)
 
   function toggleSelect(id: string) {
     setSelectedIds(prev => {
@@ -44,6 +45,7 @@ export default function FavoritesPage() {
   function handleRemove(id: string) {
     removeCamp(id)
     setSelectedIds(prev => prev.filter(x => x !== id))
+    setConfirmId(null)
   }
 
   function resetCompare() {
@@ -158,12 +160,12 @@ export default function FavoritesPage() {
                     <p className="font-semibold text-gray-900 text-xs leading-snug line-clamp-2">{camp.name}</p>
                     <p className="text-xs text-gray-400 mt-0.5">{camp.area}</p>
                     <p className="text-xs font-medium text-green-700 mt-0.5">¥{camp.price_min.toLocaleString()}〜</p>
-                    <div className="flex items-center gap-1.5 mt-2">
+                    <div className="flex flex-col gap-1.5 mt-2">
                       <button
                         type="button"
                         onClick={() => toggleSelect(camp.id)}
                         disabled={isFull}
-                        className={`flex-1 text-xs py-1.5 rounded-lg font-medium border transition-all ${
+                        className={`w-full text-xs py-1.5 rounded-lg font-medium border transition-all ${
                           isSelected
                             ? 'bg-green-600 text-white border-green-600'
                             : isFull
@@ -175,11 +177,10 @@ export default function FavoritesPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => handleRemove(camp.id)}
-                        className="text-gray-300 hover:text-red-400 text-lg leading-none px-1"
-                        aria-label="削除"
+                        onClick={() => setConfirmId(camp.id)}
+                        className="w-full text-xs py-1.5 rounded-lg font-medium border border-red-200 text-red-400"
                       >
-                        ×
+                        削除
                       </button>
                     </div>
                   </div>
@@ -189,6 +190,31 @@ export default function FavoritesPage() {
           </div>
         )}
       </main>
+
+      {confirmId && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-6">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-xs shadow-xl">
+            <p className="font-semibold text-gray-900 text-center mb-1">お気に入りから削除しますか？</p>
+            <p className="text-xs text-gray-400 text-center mb-5">この操作は取り消せません</p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setConfirmId(null)}
+                className="flex-1 py-2.5 text-sm rounded-xl border border-gray-200 text-gray-600 font-medium"
+              >
+                キャンセル
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRemove(confirmId)}
+                className="flex-1 py-2.5 text-sm rounded-xl bg-red-500 text-white font-medium"
+              >
+                削除する
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
