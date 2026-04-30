@@ -98,7 +98,10 @@ export default function FavoritesPage() {
   return (
     <div className="min-h-screen bg-gray-50 max-w-lg mx-auto pb-16">
       <div className="sticky top-0 bg-white border-b border-gray-200 px-4 py-3 z-10">
-        <h1 className="font-bold text-gray-900">お気に入り</h1>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="text-green-600 text-sm shrink-0">← 戻る</Link>
+          <h1 className="font-bold text-gray-900">お気に入り</h1>
+        </div>
         {camps.length > 0 && (
           <p className="text-xs text-gray-400 mt-0.5">
             {selectedIds.length === 0
