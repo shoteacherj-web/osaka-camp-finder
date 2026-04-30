@@ -31,7 +31,7 @@ export function VisitLogForm({ camps, defaultCampsiteId, onSubmit }: Props) {
           value={campsiteId}
           onChange={e => setCampsiteId(e.target.value)}
           required
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900"
         >
           <option value="">選択してください</option>
           {camps.map(c => (
@@ -47,7 +47,7 @@ export function VisitLogForm({ camps, defaultCampsiteId, onSubmit }: Props) {
           value={visitDate}
           onChange={e => setVisitDate(e.target.value)}
           required
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900"
         />
       </div>
 
@@ -74,7 +74,7 @@ export function VisitLogForm({ camps, defaultCampsiteId, onSubmit }: Props) {
           onChange={e => setMemo(e.target.value)}
           rows={4}
           placeholder="感想・メモを入力..."
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-gray-900"
         />
       </div>
 
