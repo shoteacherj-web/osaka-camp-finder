@@ -19,7 +19,7 @@ type Props = {
 
 export function CampCard({ camp, todayWeather, isVisited }: Props) {
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite)
-  const favorited = useFavoritesStore((s) => s.campIds.includes(camp.id))
+  const favorited = useFavoritesStore((s) => s.isFavorite(camp.id))
 
   return (
     <div className="relative">
@@ -82,6 +82,7 @@ export function CampCard({ camp, todayWeather, isVisited }: Props) {
       <button
         type="button"
         aria-label={favorited ? 'お気に入りから削除' : 'お気に入りに追加'}
+        aria-pressed={favorited}
         onClick={(e) => {
           e.preventDefault()
           e.stopPropagation()
