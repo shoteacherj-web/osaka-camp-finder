@@ -32,6 +32,9 @@ export const useCompareStore = create<CompareStore>()(
       clearCompare: () => set({ campIds: [], isReady: false }),
       markNavigated: () => set({ isReady: false }),
     }),
-    { name: 'osaka-camp-compare' }
+    {
+      name: 'osaka-camp-compare',
+      partialize: (state) => ({ campIds: state.campIds }),
+    }
   )
 )
