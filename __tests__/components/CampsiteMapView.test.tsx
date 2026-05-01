@@ -4,7 +4,6 @@ import { CampsiteMapView } from '@/components/CampsiteMapView'
 import type { Campsite } from '@/types'
 
 jest.mock('@vis.gl/react-google-maps', () => ({
-  APIProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   Map: ({ children }: { children: React.ReactNode }) => <div data-testid="google-map">{children}</div>,
   AdvancedMarker: ({ onClick, title }: { onClick: () => void; title: string }) => (
     <button type="button" onClick={onClick} aria-label={title}>marker</button>
