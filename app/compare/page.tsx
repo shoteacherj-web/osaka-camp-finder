@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCamps } from '@/hooks/useCamps'
-import { useCompareStore } from '@/stores/compareStore'
+import { useFavoritesStore } from '@/stores/favoritesStore'
 import { CompareCard } from '@/components/CompareCard'
 import type { Campsite, Amenity, CampsiteFilter } from '@/types'
 
@@ -29,7 +29,7 @@ function cellValue(camp: Campsite, key: string): string {
 
 export default function FavoritesPage() {
   const { camps: allCamps, loading } = useCamps(DEFAULT_FILTER)
-  const { campIds, removeCamp } = useCompareStore()
+  const { campIds, toggleFavorite } = useFavoritesStore()
   const camps = allCamps.filter(c => campIds.includes(c.id))
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [confirmId, setConfirmId] = useState<string | null>(null)
@@ -43,7 +43,7 @@ export default function FavoritesPage() {
   }
 
   function handleRemove(id: string) {
-    removeCamp(id)
+    toggleFavorite(id)
     setSelectedIds(prev => prev.filter(x => x !== id))
     setConfirmId(null)
   }
