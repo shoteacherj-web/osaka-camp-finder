@@ -17,17 +17,13 @@ const COMPARE_ROWS: Array<{ label: string; key: string }> = [
   { label: 'ペット可', key: 'pet' },
 ]
 
-const AMENITY_LABELS: Record<string, string> = {
-  toilet: 'トイレ', shower: 'シャワー', power: '電源', pet: 'ペット可',
-}
-
 function cellValue(camp: Campsite, key: string): string {
   if (key === 'price') return `¥${camp.price_min.toLocaleString()}〜`
   if (key === 'area') return camp.area
   return camp.amenities.includes(key as Amenity) ? '✅' : '❌'
 }
 
-export default function FavoritesPage() {
+export default function ComparePage() {
   const { camps: allCamps, loading } = useCamps(DEFAULT_FILTER)
   const { campIds, toggleFavorite } = useFavoritesStore()
   const camps = allCamps.filter(c => campIds.includes(c.id))
