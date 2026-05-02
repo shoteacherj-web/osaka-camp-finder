@@ -51,3 +51,12 @@ export type CampsiteFilter = {
   amenities: Amenity[]
   search: string
 }
+
+export type Review = {
+  id: string
+  campsite_id: string
+  rating: number        // 1〜5
+  comment: string
+  visit_date: string    // YYYY-MM-DD
+  created_at: string
+}
