@@ -5,8 +5,9 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
 }))
 
-jest.mock('@/stores/compareStore', () => ({
-  useCompareStore: () => ({ campIds: [] }),
+jest.mock('@/stores/favoritesStore', () => ({
+  useFavoritesStore: (selector: (s: { campIds: string[] }) => unknown) =>
+    selector({ campIds: [] }),
 }))
 
 describe('BottomNav', () => {

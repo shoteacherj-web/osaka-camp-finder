@@ -1,11 +1,11 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCompareStore } from '@/stores/compareStore'
+import { useFavoritesStore } from '@/stores/favoritesStore'
 
 export function BottomNav() {
   const pathname = usePathname()
-  const { campIds } = useCompareStore()
+  const campIds = useFavoritesStore(s => s.campIds)
 
   if (pathname.startsWith('/admin')) return null
 
