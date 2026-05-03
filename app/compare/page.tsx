@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useCamps } from '@/hooks/useCamps'
-import { useCompareStore } from '@/stores/compareStore'
+import { useFavoritesStore } from '@/stores/favoritesStore'
 import { CompareCard } from '@/components/CompareCard'
 import type { Campsite, Amenity, CampsiteFilter } from '@/types'
 
@@ -17,19 +17,15 @@ const COMPARE_ROWS: Array<{ label: string; key: string }> = [
   { label: 'ペット可', key: 'pet' },
 ]
 
-const AMENITY_LABELS: Record<string, string> = {
-  toilet: 'トイレ', shower: 'シャワー', power: '電源', pet: 'ペット可',
-}
-
 function cellValue(camp: Campsite, key: string): string {
   if (key === 'price') return `¥${camp.price_min.toLocaleString()}〜`
   if (key === 'area') return camp.area
   return camp.amenities.includes(key as Amenity) ? '✅' : '❌'
 }
 
-export default function FavoritesPage() {
+export default function ComparePage() {
   const { camps: allCamps, loading } = useCamps(DEFAULT_FILTER)
-  const { campIds, removeCamp } = useCompareStore()
+  const { campIds, toggleFavorite } = useFavoritesStore()
   const camps = allCamps.filter(c => campIds.includes(c.id))
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [confirmId, setConfirmId] = useState<string | null>(null)
@@ -43,7 +39,7 @@ export default function FavoritesPage() {
   }
 
   function handleRemove(id: string) {
-    removeCamp(id)
+    toggleFavorite(id)
     setSelectedIds(prev => prev.filter(x => x !== id))
     setConfirmId(null)
   }

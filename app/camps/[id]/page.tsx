@@ -4,10 +4,12 @@ import Link from 'next/link'
 import { useCamp } from '@/hooks/useCamp'
 import { useWeather } from '@/hooks/useWeather'
 import { useVisitLogs } from '@/hooks/useVisitLogs'
-import { useCompareStore } from '@/stores/compareStore'
+import { useFavoritesStore } from '@/stores/favoritesStore'
 import { WeatherWidget } from '@/components/WeatherWidget'
 import { CampMap } from '@/components/CampMap'
 import { VisitLogCard } from '@/components/VisitLogCard'
+import { useReviews } from '@/hooks/useReviews'
+import { ReviewCard } from '@/components/ReviewCard'
 
 const AMENITY_LABELS: Record<string, string> = {
   toilet: 'トイレ',
@@ -23,7 +25,8 @@ export default function CampDetailPage() {
 
   const { forecast, loading: weatherLoading } = useWeather(id)
   const { logs, deleteLog } = useVisitLogs(id)
-  const { campIds, addCamp, removeCamp } = useCompareStore()
+  const { toggleFavorite, isFavorite } = useFavoritesStore()
+  const { reviews, loading: reviewsLoading } = useReviews(id)
 
   if (campLoading) {
     return (
@@ -52,7 +55,7 @@ export default function CampDetailPage() {
     )
   }
 
-  const inFavorites = campIds.some(c => c === id)
+  const inFavorites = isFavorite(id)
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-lg mx-auto">
@@ -113,7 +116,7 @@ export default function CampDetailPage() {
           <div className="mt-4">
             <button
               type="button"
-              onClick={() => inFavorites ? removeCamp(id) : addCamp(id)}
+              onClick={() => toggleFavorite(id)}
               className={`w-full py-2.5 text-sm rounded-xl border font-medium transition-colors ${inFavorites ? 'bg-green-600 text-white border-green-600' : 'border-green-600 text-green-600 hover:bg-green-50'}`}
             >
               {inFavorites ? '♡ お気に入り済み' : '♡ お気に入りに追加'}
@@ -152,6 +155,21 @@ export default function CampDetailPage() {
             <div className="space-y-3">
               {logs.map(log => (
                 <VisitLogCard key={log.id} log={log} onDelete={deleteLog} />
+              ))}
+            </div>
+          )}
+        </section>
+
+        <section className="bg-white rounded-xl p-4 shadow-sm">
+          <h2 className="font-semibold text-gray-900 mb-3">口コミ</h2>
+          {reviewsLoading ? (
+            <p className="text-sm text-gray-400">読み込み中...</p>
+          ) : reviews.length === 0 ? (
+            <p className="text-sm text-gray-400">まだ口コミがありません</p>
+          ) : (
+            <div className="space-y-2">
+              {reviews.map(review => (
+                <ReviewCard key={review.id} review={review} />
               ))}
             </div>
           )}

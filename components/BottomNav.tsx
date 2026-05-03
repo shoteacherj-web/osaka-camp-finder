@@ -1,15 +1,17 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useCompareStore } from '@/stores/compareStore'
+import { useFavoritesStore } from '@/stores/favoritesStore'
 
 export function BottomNav() {
   const pathname = usePathname()
-  const { campIds } = useCompareStore()
+  const campIds = useFavoritesStore(s => s.campIds)
 
   if (pathname.startsWith('/admin')) return null
 
   const navItems = [
+    { href: '/', label: 'さがす', icon: '🔍', badge: 0 },
+    { href: '/map', label: 'マップ', icon: '🗺️', badge: 0 },
     { href: '/compare', label: 'お気に入り', icon: '♡', badge: campIds.length },
     { href: '/logs', label: '記録', icon: '📓', badge: 0 },
   ]
