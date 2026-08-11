@@ -3,13 +3,7 @@
 import Link from 'next/link'
 import type { Campsite, DayWeather } from '@/types'
 import { useFavoritesStore } from '@/stores/favoritesStore'
-
-const AMENITY_LABELS: Record<string, string> = {
-  toilet: 'トイレ',
-  shower: 'シャワー',
-  power: '電源',
-  pet: 'ペット可',
-}
+import { AMENITY_LABELS } from '@/lib/amenities'
 
 type Props = {
   camp: Campsite

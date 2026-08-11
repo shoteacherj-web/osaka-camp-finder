@@ -6,17 +6,12 @@ import { useWeather } from '@/hooks/useWeather'
 import { useVisitLogs } from '@/hooks/useVisitLogs'
 import { useFavoritesStore } from '@/stores/favoritesStore'
 import { WeatherWidget } from '@/components/WeatherWidget'
+import { CampGallery } from '@/components/CampGallery'
+import { AMENITY_LABELS } from '@/lib/amenities'
 import { CampMap } from '@/components/CampMap'
 import { VisitLogCard } from '@/components/VisitLogCard'
 import { useReviews } from '@/hooks/useReviews'
 import { ReviewCard } from '@/components/ReviewCard'
-
-const AMENITY_LABELS: Record<string, string> = {
-  toilet: 'トイレ',
-  shower: 'シャワー',
-  power: '電源',
-  pet: 'ペット可',
-}
 
 export default function CampDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -64,11 +59,7 @@ export default function CampDetailPage() {
         <h1 className="font-bold text-gray-900 truncate">{camp.name}</h1>
       </div>
 
-      {camp.image_url ? (
-        <img src={camp.image_url} alt={camp.name} className="w-full aspect-video object-cover" />
-      ) : (
-        <div className="w-full aspect-video bg-gradient-to-br from-green-900 to-green-500" />
-      )}
+      <CampGallery campsiteId={camp.id} name={camp.name} fallbackImageUrl={camp.image_url} />
 
       <div className="px-4 py-4 space-y-4">
         <section className="bg-white rounded-xl p-4 shadow-sm">

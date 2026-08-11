@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
-import campsData from '@/data/camps.json'
 import { fetchForecast } from '@/lib/weather'
-import type { Campsite } from '@/types'
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -15,7 +13,13 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const camps = campsData as Campsite[]
+  const { data: camps, error: fetchError } = await supabaseAdmin
+    .from('campsites')
+    .select('id, lat, lng')
+  if (fetchError) {
+    return NextResponse.json({ error: fetchError.message }, { status: 500 })
+  }
+
   const results: { id: string; status: string }[] = []
 
   for (const camp of camps) {
