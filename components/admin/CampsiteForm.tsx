@@ -8,6 +8,9 @@ const AMENITY_OPTIONS: { key: Amenity; label: string }[] = [
   { key: 'shower', label: 'シャワー' },
   { key: 'power', label: '電源' },
   { key: 'pet', label: 'ペット可' },
+  { key: 'water', label: '水道' },
+  { key: 'firewood', label: '薪の購入' },
+  { key: 'cooking', label: '炊事場' },
 ]
 
 type FormData = Omit<Campsite, 'id'>
@@ -139,13 +142,18 @@ export function CampsiteForm({ initial = EMPTY, onSubmit, submitLabel }: Props) 
       </div>
       {field('設備', (
         <div className="flex gap-3 flex-wrap">
-          {AMENITY_OPTIONS.map(({ key, label }) => (
-            <label key={key} className="flex items-center gap-1.5 text-sm cursor-pointer">
-              <input type="checkbox" checked={form.amenities.includes(key)} onChange={() => toggleAmenity(key)}
-                className="rounded text-green-600" />
-              {label}
-            </label>
-          ))}
+          {AMENITY_OPTIONS.map(({ key, label }) => {
+            const checked = form.amenities.includes(key)
+            return (
+              <label key={key} className="flex items-center gap-2 cursor-pointer select-none">
+                <span className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${checked ? 'bg-green-600 border-green-600' : 'bg-white border-gray-400'}`}
+                  onClick={() => toggleAmenity(key)}>
+                  {checked && <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 12 12" stroke="currentColor" strokeWidth={2.5}><polyline points="1.5,6 4.5,9 10.5,3"/></svg>}
+                </span>
+                <span className="text-sm font-medium text-gray-800">{label}</span>
+              </label>
+            )
+          })}
         </div>
       ))}
       {field('予約 URL *', (

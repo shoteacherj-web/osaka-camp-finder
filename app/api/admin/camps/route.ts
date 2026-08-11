@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { checkAdminAuth } from '@/lib/adminAuth'
+import { randomUUID } from 'crypto'
 
 function adminSupabase() {
   return createClient(
@@ -19,7 +20,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   if (!checkAdminAuth(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const body = await req.json()
-  const { data, error } = await adminSupabase().from('campsites').insert(body).select().single()
+  const camp = { id: randomUUID(), ...body }
+  const { data, error } = await adminSupabase().from('campsites').insert(camp).select().single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
   return NextResponse.json(data, { status: 201 })
 }

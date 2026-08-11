@@ -1,6 +1,6 @@
 # Osaka Camp Finder — 進捗まとめ
 
-## ステータス：Phase 2 実装中（2026-04-30）
+## ステータス：Phase 3 本番デプロイ済み（2026-05-03）
 
 **URL:** https://osaka-camp-finder.vercel.app/
 
@@ -33,6 +33,7 @@
   - [x] キャンプ場 CRUD（一覧・新規追加・編集・削除）
   - [x] 住所→座標自動取得（Google Geocoding API）
   - [x] service_role キーによるサーバーサイド書き込み
+- [x] 訪問記録フォームの入力文字色を黒に修正（`VisitLogForm.tsx`）
 
 ### インフラ・設定
 - [x] Supabase テーブル作成（campsites / visit_logs / weather_cache）
@@ -43,14 +44,28 @@
 
 ---
 
-## 残課題
+## 残課題（優先度順）
 
-- [ ] Vercel に `ADMIN_PASSWORD` 環境変数を追加してリデプロイ（本番管理画面を有効化）
-- [ ] Google Maps API の localhost:3001 を許可リストに追加（ローカル開発用）
-- [ ] 口コミ表示（reviews テーブルは作成済み）
-- [ ] 一覧マップ表示（全ピン + ポップアップ）
-- [ ] 写真アップロード（Supabase Storage）
-- [ ] お気に入りリスト画面
+### すぐできる・設定系（優先度：高）
+- [x] Vercel に `ADMIN_PASSWORD` 環境変数を追加してリデプロイ（本番管理画面を有効化）
+- [x] Google Maps API の localhost:3001 を許可リストに追加（ローカル開発用）
+
+### Phase 3：機能追加（2026-05-03 完了）
+- [x] compareStore バグ修正（localStorage key を `osaka-camp-compare` に変更・isReady / markNavigated / clearCompare 追加）
+- [x] CampCard に ♡ お気に入りボタン追加（`favoritesStore` 使用・aria-pressed 対応）
+- [x] `/compare` ページを `favoritesStore` ベースに更新（compareStore との役割分離）
+- [x] 詳細ページのお気に入りボタンを `favoritesStore` に統一
+- [x] 一覧マップ表示（`/map` ページ新設・`CampsiteMapView` コンポーネント・全ピン + InfoWindow）
+- [x] BottomNav を4タブ化（さがす / マップ / お気に入り / 記録）・お気に入りバッジを `favoritesStore` に連動
+- [x] 口コミ表示（`Review` 型・`useReviews` フック・`ReviewCard` コンポーネント・詳細ページ口コミセクション）
+- [x] 59テスト全通過（14スイート）・ビルド成功
+
+### Phase 3：残作業（手動）
+- [ ] Supabase reviews テーブルにサンプルデータ投入
+- [x] `feature/phase3` を `master` にマージ・Vercel デプロイ済み（2026-05-03）
+
+### Phase 4（未着手・優先度：低）
+- [ ] 写真アップロード（Supabase Storage）— 実装コストが高い
 
 ---
 

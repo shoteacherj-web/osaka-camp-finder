@@ -1,5 +1,5 @@
 export type Area = '大阪' | '兵庫' | '京都' | '奈良' | '和歌山' | '滋賀'
-export type Amenity = 'toilet' | 'shower' | 'power' | 'pet'
+export type Amenity = 'toilet' | 'shower' | 'power' | 'pet' | 'water' | 'firewood' | 'cooking'
 export type PriceRange = 'budget' | 'mid' | 'premium'
 
 export type Campsite = {

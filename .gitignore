@@ -44,3 +44,5 @@ next-env.d.ts
 .worktrees/
 .superpowers/
 client_secret*.json
+
+.vercel
